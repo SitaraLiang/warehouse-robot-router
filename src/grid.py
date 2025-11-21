@@ -30,10 +30,28 @@ def get_grid(txt_file):
 			
 		return grids
 		
-def get_neighbors(grid, i, j, d):
+def get_neighbors(grid, state):
 	#Retourne une liste de voisins, on sait qu'un état peut avoir 5 voisins en théorie mais parfois il y a un obstacle qui bloque, ou alors un voisin qui n'existe pas
 	
+	neighbors = []
+	i, j, d = state
+	orientations = {0: (-1, 0),
+					1: (0, 1),
+					2: (1, 0),
+					3: (0, -1)
+					}
 	
+	i1, j1 = orientations[d]
+	for k in range(1,4):
+		#A FAIRE vérifier si on est encore dans la grille avant d'ajouter le voisin
+		neighbors.append((i + k * i1, j + k * j1, d))
+		
+	neighbors.append((i, j, (d+1)%4))
+	neighbors.append((i, j, (d-1)%4))
+	
+	
+	
+	return neighbors
 		
 def get_shortest_path(grid, start, end):
 	#Retourne le chemin le plus court, en utilisant un BFS
@@ -64,7 +82,8 @@ def get_shortest_path(grid, start, end):
     return []
 	
 grille = get_grid('../res/grille.txt')
-#print(grille[0][0])
+k = get_neighbors(grille[0][0], grille[0][1])
+print(grille[0][1], k)
 
 	
 	
