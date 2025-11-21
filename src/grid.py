@@ -115,14 +115,15 @@ def get_shortest_path(grid, start, end):
                     return path
     return []
 	
-grille = get_grid('grille.txt')
+grille = get_grid('../res/grille.txt')
 #print(grille[0][0])
 neighbors = get_neighbors(grille[0][0], grille[0][1])
-#print(neighbors)
-test = get_shortest_path(grille[0][0], grille[0][1], grille[0][2])
+print(grille[0][1])
+print(neighbors)
+#test = get_shortest_path(grille[0][0], grille[0][1], grille[0][2])
 #print(grille[0][2])
-print(test)
-print(len(test))
+#print(test)
+#print(len(test))
 #print(len(test))
 	
 	
