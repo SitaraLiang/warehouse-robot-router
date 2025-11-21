@@ -44,6 +44,7 @@ def get_neighbors(grid, state):
 	i1, j1 = orientations[d]
 	for k in range(1,4):
 		#A FAIRE vérifier si on est encore dans la grille avant d'ajouter le voisin
+		#Regarder aussi si il n'y a pas d'obstacle entre les deux etats
 		neighbors.append((i + k * i1, j + k * j1, d))
 		
 	neighbors.append((i, j, (d+1)%4))
