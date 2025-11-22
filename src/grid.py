@@ -76,7 +76,7 @@ def get_neighbors(grid, state):
 		ni = i + k * i1
 		nj = j + k * j1
 
-		if not (0 < ni < n and 0 < nj < m):
+		if not (0 <= ni < n and 0 <= nj < m):
 		    continue
 		
 		if clear_path(grid, i, j, ni, nj):
