@@ -165,7 +165,7 @@ def path_to_commands(path):
 
 
 	
-grille = get_grid('../res/grille2.txt')
+grille = get_grid('../res/grille.txt')
 #print(grille[0][0])
 i, j, d = grille[0][1]
 depart = (i, j, d)
