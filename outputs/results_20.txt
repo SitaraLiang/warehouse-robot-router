@@ -1,0 +1,40 @@
+START: 1 18 ORIENT: S
+END:   8 16
+5 a1 a3 a3 D a2
+
+START: 8 13 ORIENT: S
+END:   5 7
+5 D a3 a3 D a3
+
+START: 0 18 ORIENT: S
+END:   11 19
+6 a2 a3 a3 a3 G a1
+
+START: 2 7 ORIENT: W
+END:   18 14
+12 D D a1 a3 a3 D a1 a3 a3 a3 a3 a3
+
+START: 8 12 ORIENT: S
+END:   0 8
+9 D a1 D a3 a3 G a3 D a2
+
+START: 5 2 ORIENT: N
+END:   10 7
+6 D a2 a3 D a2 a3
+
+START: 3 19 ORIENT: S
+END:   10 16
+8 D a1 G a1 a3 a3 D a2
+
+START: 0 12 ORIENT: W
+END:   6 8
+6 G a3 a3 D a1 a3
+
+START: 15 14 ORIENT: E
+END:   6 17
+6 G a3 a3 a3 D a3
+
+START: 11 5 ORIENT: N
+END:   8 15
+6 a3 D a1 a3 a3 a3
+

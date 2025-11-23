@@ -1,13 +1,43 @@
 import numpy as np
 from queue import Queue
+import os
+from icecream import ic
+
+DIRS = {
+    'N': (-1, 0),
+    'E': (0, 1),
+    'S': (1, 0),
+    'W': (0, -1)
+}
+
+ROT_RIGHT = {
+    'N': 'E',
+    'E': 'S',
+    'S': 'W',
+    'W': 'N'
+}
+
+ROT_LEFT = {
+    'N': 'W',
+    'W': 'S',
+    'S': 'E',
+    'E': 'N'
+}
 
 def get_grid(txt_file):
 	#Retourne une liste de grilles, les grilles pour l'instant c'est un tuple avec la grille et les deux points de départ et d'arrivée, c'est dégueu mais bon
+	script_dir = os.path.dirname(os.path.abspath(__file__))
+	file_path = os.path.join(script_dir, txt_file)
 
-	with open(txt_file, mode='r') as txt:
+	with open(file_path, mode='r') as txt:
 		
 		#Orientation selon les aiguilles d'une montre, complètement arbitraire ptdr
-		orts = {'nord': 0, 'sud': 2, 'est': 1, 'ouest': 3}
+		orientation_map = {
+        "nord":  'N',
+        "est":   'E',
+        "sud":   'S',
+        "ouest": 'W'
+        }
 		grids = []
 		
 		lines = txt.readlines()
@@ -22,7 +52,7 @@ def get_grid(txt_file):
 				grid.append(line)
 			
 			infos = lines[cpt+int(i)+1].split(' ')
-			debut = (int(infos[0]), int(infos[1]), orts[infos[4].strip('\n')])
+			debut = (int(infos[0]), int(infos[1]), orientation_map[infos[4].strip('\n')])
 			fin = (int(infos[2]), int(infos[3]), -1)
 			
 			grids.append([grid, debut, fin])
@@ -33,12 +63,11 @@ def get_grid(txt_file):
 
 def clear_path(grid, i, j, ni, nj):
 	#Vérifie si on peut aller d'une case à l'autre
-
 	if i == ni:
 		step = 1 if nj > j else -1
 		for y in range(j+step, nj+step, step):
 			if i < len(grid) - 1:
-				if grid[i+1][y] == 1:
+				if grid[i-1][y] == 1:
 					return False
 			if grid[i][y] == 1:
 				return False
@@ -50,38 +79,35 @@ def clear_path(grid, i, j, ni, nj):
 			if j > 0:
 				if grid[x][j-1] == 1:
 					return False
+				if grid[x-1][j] == 1:
+					return False
+				if grid[x-1][j-1] == 1:
+					return False
 			if grid[x][j] == 1:
 				return False
 		return True
 
 def get_neighbors(grid, state):
 	#Retourne une liste de voisins, on sait qu'un état peut avoir 5 voisins en théorie mais parfois il y a un obstacle qui bloque, ou alors un voisin qui n'existe pas
-	
+	#ic(state)
 	neighbors = []
 	i, j, d = state
 	n = len(grid)
 	m = len(grid[0])
-	orientations = {0: (-1, 0),
-					1: (0, 1),
-					2: (1, 0),
-					3: (0, -1)
-					}
-	#print(grid.shape)
-	i1, j1 = orientations[d]
-	
-	neighbors.append((i, j, (d+1)%4))
-	neighbors.append((i, j, (d-1)%4))
+	neighbors.append((i, j, ROT_RIGHT[d]))
+	neighbors.append((i, j, ROT_LEFT[d]))
+	di, dj = DIRS[d]
 	
 	for k in range(1,4):
-		ni = i + k * i1
-		nj = j + k * j1
-
+		ni = i + k * di
+		nj = j + k * dj
+		
 		if not (0 <= ni < n and 0 <= nj < m):
 		    continue
 		
 		if clear_path(grid, i, j, ni, nj):
 		   	neighbors.append((ni, nj, d))
-	
+	#ic(neighbors)
 	return neighbors
 		
 def get_shortest_path(grid, start, end):
@@ -92,17 +118,16 @@ def get_shortest_path(grid, start, end):
     visited = dict()
     visited[start] = True
     prev = dict()
-
     while not q.empty():
         curr = q.get()
         neighbors = get_neighbors(grid, curr)
-
         for neigh in neighbors:
-            if neigh not in visited:
+            if neigh not in visited: 
                 q.put(neigh)
                 visited[neigh] = True
                 prev[neigh] = curr
                 if neigh[0] == end[0] and neigh[1] == end[1]:
+                    ic(neigh, end)
                     path = [neigh]
                     k = neigh
                     while k != start:
@@ -111,18 +136,49 @@ def get_shortest_path(grid, start, end):
                     path.reverse()
                     return path
     return []
+
+def path_to_commands(path):
+    """
+    D: turn right
+    G: turn left
+    aN: advance N cells
+    """
+    if len(path) < 2:
+        return []
+    commands = []
+    ROT_RIGHT = {'N':'E','E':'S','S':'W','W':'N'}
+    ROT_LEFT  = {'N':'W','W':'S','S':'E','E':'N'}
+
+    for k in range(1, len(path)):
+        (i1, j1, d1) = path[k-1]
+        (i2, j2, d2) = path[k]
+        if d2 != d1:
+            if ROT_RIGHT[d1] == d2:
+                commands.append("D")
+            elif ROT_LEFT[d1] == d2:
+                commands.append("G")
+        dist = abs(i2 - i1) + abs(j2 - j1)
+        if dist > 0:
+            commands.append(f"a{dist}")
+
+    return commands
+
+
 	
-grille = get_grid('../res/grille.txt')
-print(grille[0][0])
+grille = get_grid('../res/grille2.txt')
+#print(grille[0][0])
 i, j, d = grille[0][1]
-depart = (i-1, j, d)
+depart = (i, j, d)
+#ic(depart)
 i2, j2, d2 = grille[0][2]
-fin = (i2 -1, j2, d2)
-print(fin)
-k = get_neighbors(grille[0][0], depart)
+fin = (i2, j2, d2)
+#ic(fin)
+#k = get_neighbors(grille[0][0], depart)
 t = get_shortest_path(grille[0][0], depart, fin)
 print(t)
-print(len(t))
+commands = path_to_commands(t)
+print(commands)
+print(len(commands))
 #print(grille[0][1], k)
 
 	
