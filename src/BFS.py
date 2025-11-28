@@ -147,8 +147,8 @@ def path_to_commands(path):
     if len(path) < 2:
         return []
     commands = []
-    ROT_RIGHT = {'N':'E','E':'S','S':'W','W':'N'}
-    ROT_LEFT  = {'N':'W','W':'S','S':'E','E':'N'}
+    #ROT_RIGHT = {'N':'E','E':'S','S':'W','W':'N'}
+    #ROT_LEFT  = {'N':'W','W':'S','S':'E','E':'N'}
 
     for k in range(1, len(path)):
         (i1, j1, d1) = path[k-1]
