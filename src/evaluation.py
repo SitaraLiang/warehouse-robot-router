@@ -75,8 +75,67 @@ def run_experiments():
         }
 
     return results
+    
+def run_experiments2_TEST(file_size, file_obs):
 
+    generer_grilles_test(file_size, file_obs)
+    grids_obs = get_grid(file_obs)
+    grids_size = get_grid(file_size)
+    res_obs = []
+    res_size = []
+    
+    with open(f'result_{file_obs}', mode = 'w') as fobs:
+        i = 0
+        cpt = 0
+        for grid in grids_obs:
+            #print(grid[0], grid[1])
+            t0 = time.perf_counter()
+            path = get_shortest_path(*grid)
+            commands = path_to_commands(path)
+            t1 = time.perf_counter()
+            print(f'Temps : {t1 - t0}')
+            #if i == 9:
+            if i == 99:
+                cpt += (t1 - t0)
+                #res_obs.append(cpt/10)
+                res_obs.append(cpt/100)
+                i = 0
+                cpt = 0
+            else:
+                i += 1
+                
+            print(f'Resultat : {len(commands)} {commands}')
+            fobs.write(f'{len(commands)} {commands}\n')
+            fobs.write('\n')
+    
+    with open(f'result_{file_size}', mode = 'w') as fsize:
+        i = 0
+        cpt = 0
+        for grid in grids_size:
+            t0 = time.perf_counter()
+            path = get_shortest_path(*grid)
+            commands = path_to_commands(path)
+            t1 = time.perf_counter()
+            print(f'Temps : {t1 - t0}')
+            #if i == 9:
+            if i == 99:
+                cpt += (t1 - t0)
+                #res_size.append(cpt/10)
+                res_size.append(cpt/100)
+                i = 0
+                cpt = 0
+            else:
+                i += 1
+            print(f'Resultat : {len(commands)} {commands}')
+            fsize.write(f'{len(commands)} {commands}\n')
+            fsize.write('\n')
+            
+    print(f'Obs : {res_obs}')
+    print(f'Size : {res_size}')
+    
+    return res_obs, res_size
 
+"""
 if __name__ == "__main__":
     results = run_experiments()
 
@@ -93,4 +152,21 @@ if __name__ == "__main__":
     plt.ylabel("Average Time (s)")
     plt.title("Average Time for BFS vs Grid Size")
     plt.grid(True)
+    plt.show()
+"""
+
+if __name__ == "__main__":
+    obs, size = run_experiments2_TEST('test_run_size.txt', 'test_run_obs.txt')
+    data = [obs, size]
+    labels = ['time/obs', 'time/size']
+    idx = [i for i in range(len(obs))]
+    
+    fig, axes = plt.subplots(1, 2, figsize=(20, 8), sharey=True)
+    for ax, dt, label in zip(axes.flatten(), data, labels):
+        ax.bar(idx, dt)
+        ax.set_xlabel(label)
+        ax.set_ylabel('temps')
+    
+    fig.suptitle('Unilateral analysis of financial data')
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.show()

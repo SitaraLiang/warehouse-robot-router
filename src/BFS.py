@@ -52,7 +52,8 @@ def get_grid(txt_file):
 				grid.append(line)
 			
 			infos = lines[cpt+int(i)+1].split(' ')
-			debut = (int(infos[0]), int(infos[1]), orientation_map[infos[4].strip('\n')])
+			#debut = (int(infos[0]), int(infos[1]), orientation_map[infos[4].strip('\n')])
+			debut = (int(infos[0]), int(infos[1]), infos[4].strip('\n'))
 			fin = (int(infos[2]), int(infos[3]), -1)
 			
 			grids.append([grid, debut, fin])
@@ -122,7 +123,7 @@ def get_shortest_path(grid, start, end):
         curr = q.get()
         neighbors = get_neighbors(grid, curr)
         for neigh in neighbors:
-            if neigh not in visited: 
+            if neigh not in visited:
                 q.put(neigh)
                 visited[neigh] = True
                 prev[neigh] = curr
@@ -164,7 +165,7 @@ def path_to_commands(path):
     return commands
 
 
-	
+"""
 grille = get_grid('../res/grille.txt')
 #print(grille[0][0])
 i, j, d = grille[0][1]
@@ -180,6 +181,8 @@ commands = path_to_commands(t)
 print(commands)
 print(len(commands))
 #print(grille[0][1], k)
+"""
+
 
 	
 	
