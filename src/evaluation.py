@@ -1,5 +1,4 @@
 import time
-from statistics import mean
 from generate_grid import *
 from BFS import *
 from pathlib import Path
