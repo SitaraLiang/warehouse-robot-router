@@ -1,7 +1,11 @@
 import numpy as np
 from queue import Queue
 import os
-from icecream import ic
+#from icecream import ic
+from pathlib import Path
+
+OUTPUT_DIR = Path("outputs")
+OUTPUT_DIR.mkdir(exist_ok=True)
 
 DIRS = {
     'N': (-1, 0),
@@ -26,10 +30,8 @@ ROT_LEFT = {
 
 def get_grid(txt_file):
 	#Retourne une liste de grilles, les grilles pour l'instant c'est un tuple avec la grille et les deux points de départ et d'arrivée, c'est dégueu mais bon
-	script_dir = os.path.dirname(os.path.abspath(__file__))
-	file_path = os.path.join(script_dir, txt_file)
 
-	with open(file_path, mode='r') as txt:
+	with open(OUTPUT_DIR/txt_file, mode='r') as txt:
 		
 		#Orientation selon les aiguilles d'une montre, complètement arbitraire ptdr
 		orientation_map = {
@@ -128,7 +130,7 @@ def get_shortest_path(grid, start, end):
                 visited[neigh] = True
                 prev[neigh] = curr
                 if neigh[0] == end[0] and neigh[1] == end[1]:
-                    ic(neigh, end)
+                    #ic(neigh, end)
                     path = [neigh]
                     k = neigh
                     while k != start:
@@ -147,8 +149,8 @@ def path_to_commands(path):
     if len(path) < 2:
         return []
     commands = []
-    ROT_RIGHT = {'N':'E','E':'S','S':'W','W':'N'}
-    ROT_LEFT  = {'N':'W','W':'S','S':'E','E':'N'}
+    #ROT_RIGHT = {'N':'E','E':'S','S':'W','W':'N'}
+    #ROT_LEFT  = {'N':'W','W':'S','S':'E','E':'N'}
 
     for k in range(1, len(path)):
         (i1, j1, d1) = path[k-1]

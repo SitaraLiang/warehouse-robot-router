@@ -1,4 +1,8 @@
 import random
+from pathlib import Path
+
+OUTPUT_DIR = Path("outputs")
+OUTPUT_DIR.mkdir(exist_ok=True)
 
 def generate_random_grid(N):
     """
@@ -80,7 +84,7 @@ def save_grid_to_file2(filename, grid, start, end):
     #test pour le append, je pense qu'il faut tout stocker dans le même fichier, enfin pour la d)
     N = len(grid)
 
-    with open(filename, "a") as f:
+    with open(OUTPUT_DIR / filename, "a") as f:
         f.write(f"{N} {N}\n")
 
         for row in grid:
@@ -93,22 +97,6 @@ def save_grid_to_file2(filename, grid, start, end):
         f.write("0 0\n")
         f.write("\n")   # fin du bloc
     
-def save_grid_to_file(filename, grid, start, end):
-    N = len(grid)
-
-    with open(filename, "w") as f:
-        f.write(f"{N} {N}\n")
-
-        for row in grid:
-            f.write(" ".join(str(x) for x in row) + "\n")
-
-        i_d, j_d, o = start
-        i_f, j_f, _ = end
-
-        f.write(f"{i_d} {j_d} {i_f} {j_f} {o}\n")
-        f.write("0 0\n")   # fin du bloc
-
-
 def generer_grilles_test(file_size, file_obs):
     obstacles = [10, 20, 30, 40, 50]
     for x in obstacles:
@@ -116,9 +104,3 @@ def generer_grilles_test(file_size, file_obs):
         for i in range(100):
             grid = generate_random_obstacle(x)
             save_grid_to_file2(file_obs, *grid)
-            
-            grid = generate_random_grid(x)
-            save_grid_to_file2(file_size, *grid)
-    
-#generer_grilles_test()
-    

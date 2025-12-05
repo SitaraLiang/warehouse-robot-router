@@ -23,9 +23,9 @@ def interface_terminal():
         print("\n=== Position de départ ===")
         i_d = int(input("i départ : "))
         j_d = int(input("j départ : "))
-        d = input("direction (n/s/w/o) : ").strip().lower()
+        d = input("direction (N/S/W/O) : ").strip().upper()
 
-        if d not in ("n", "s", "w", "o"):
+        if d not in ("N", "S", "W", "O"):
             print("Direction invalide.")
             continue
 
@@ -40,7 +40,7 @@ def interface_terminal():
         j_f = int(input("j arrivée : "))
 
         if 0 <= i_f < M and 0 <= j_f < N and grid[i_f][j_f] == 0:
-            if grid[i_f][j_f] == 0 and grid[i_f-1][j_f] == 0 and grid[i_f][j_f-1] == 0 and grid[i_f-1][j_f-1] == 0 and (i_f != i_d or j_f != j_d):
+            if grid[i_f][j_f] == 0 and grid[i_f-1][j_f] == 0 and grid[i_f][j_f-1] == 0 and grid[i_f-1][j_f-1] == 0 and not(i_f == i_d and j_f == j_d):
                 break
             else:
                 print("La position d’arrivée doit être différente du départ.")
@@ -54,6 +54,7 @@ def interface_terminal():
         print("Aucun chemin trouvé.")
         return
 
+    print(path)
     commands = path_to_commands(path)
     print("\n=== Commandes générées ===")
     print(" ".join(commands))

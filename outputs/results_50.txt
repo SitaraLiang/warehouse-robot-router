@@ -1,40 +1,40 @@
-START: 42 32 ORIENT: E
-END:   19 25
-14 D D a1 a3 a3 D a2 a3 a3 a3 a3 a3 a3 a3
+START: 31 17 ORIENT: S
+END:   36 37
+12 G a2 D a2 a3 G a3 a3 a3 a3 a3 a3
 
-START: 4 2 ORIENT: N
-END:   25 6
-11 D a1 a3 D a3 a3 a3 a3 a3 a3 a3
+START: 2 2 ORIENT: N
+END:   44 9
+19 D a1 a3 a3 D a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3
 
-START: 45 0 ORIENT: S
-END:   43 30
-14 D D a2 D a3 a3 a3 a3 a3 a3 a3 a3 a3 a3
+START: 0 27 ORIENT: S
+END:   22 8
+17 D a1 a3 a3 a3 a3 a3 a3 G a1 a3 a3 a3 a3 a3 a3 a3
 
-START: 29 2 ORIENT: E
-END:   44 6
-10 D a3 G a1 a3 D a3 a3 a3 a3
+START: 20 41 ORIENT: E
+END:   19 40
+4 G a1 G a1
 
-START: 28 7 ORIENT: W
-END:   18 47
-21 D a1 D a1 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 G a3 a3 a3
+START: 38 20 ORIENT: E
+END:   39 30
+6 a1 a3 a3 a3 D a1
 
-START: 1 24 ORIENT: W
-END:   16 42
-13 G a3 a3 a3 a3 a3 G a3 a3 a3 a3 a3 a3
+START: 12 18 ORIENT: S
+END:   31 6
+12 a1 a3 a3 a3 a3 a3 a3 D a3 a3 a3 a3
 
-START: 5 13 ORIENT: S
-END:   41 44
-25 a3 G a1 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 D a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3
+START: 25 18 ORIENT: S
+END:   12 35
+14 G a2 a3 a3 a3 a3 G a1 a3 a3 a3 a3 D a3
 
-START: 36 43 ORIENT: S
-END:   14 17
-19 D a2 a3 a3 a3 a3 a3 a3 a3 a3 D a1 a3 a3 a3 a3 a3 a3 a3
+START: 48 21 ORIENT: W
+END:   20 14
+15 D a1 a3 a3 a3 a3 a3 a3 a3 a3 a3 G a1 a3 a3
 
-START: 20 41 ORIENT: S
-END:   1 18
-19 D D a1 G a2 a3 a3 a3 a3 a3 a3 a3 D a3 a3 a3 a3 a3 a3
+START: 1 1 ORIENT: W
+END:   22 27
+19 D D a2 a3 a3 a3 a3 a3 a3 a3 a3 D a3 a3 a3 a3 a3 a3 a3
 
-START: 1 44 ORIENT: W
-END:   48 23
-25 a3 a3 G a2 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 a3 D a3 a3 a3 a3 a3
+START: 29 22 ORIENT: N
+END:   35 47
+16 D D a1 G a1 a3 a3 a3 a3 a3 a3 a3 a3 D a2 a3
 

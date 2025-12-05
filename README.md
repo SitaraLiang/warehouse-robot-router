@@ -21,6 +21,28 @@ Ce projet permet :
 pip install -r requirements.txt
 ```
 
+
+## Utilisation
+
+### Interface graphique
+Pour lancer l'interface :
+```bash
+python src/interface.py
+```
+
+### Évaluation
+
+Pour lancer les tests de performance :
+
+```bash
+python src/evaluation.py --mode <size|obstacles>
+```
+
+* `size` : teste la performance du BFS en fonction de la taille des grilles.
+* `obstacles` : teste la performance en fonction du nombre d'obstacles.
+
+  * Optionnel : vous pouvez préciser les fichiers à utiliser pour les tests d'obstacles avec `--file_size` et `--file_obs` (par défaut `test_run_size.txt` et `test_run_obs.txt`).
+
 ## Structure du code
 
 #### `generate_obstacles(M, N, P)`
@@ -68,17 +90,3 @@ Interface interactive guidant l’utilisateur :
 8. Conversion du chemin en commandes
 9. Affichage des commandes finales
 
-
-## Utilisation
-
-Pour interface: 
-```bash
-python interface.py
-```
-Pour évaluation:
-```bash
-python generate_grid.py
-```
-```bash
-python evaluation.py
-```

@@ -56,14 +56,14 @@ def generate_obstacles(M, N, P):
     return obstacles
 
 
-M, N, P = 9, 10, 10
-obstacles = generate_obstacles(M, N, P)
-print(f"Coordonates des obstacles:\n{obstacles}")
-grille = np.zeros((M, N), dtype=int)
-for i, j in obstacles:
-    grille[i][j] = 1
+#M, N, P = 9, 10, 10
+#obstacles = generate_obstacles(M, N, P)
+#print(f"Coordonates des obstacles:\n{obstacles}")
+#grille = np.zeros((M, N), dtype=int)
+#for i, j in obstacles:
+#    grille[i][j] = 1
     
-print(grille)
+#print(grille)
 
 """
 Coordonates des obstacles:
