@@ -23,9 +23,9 @@ def interface_terminal():
         print("\n=== Position de départ ===")
         i_d = int(input("i départ : "))
         j_d = int(input("j départ : "))
-        d = input("direction (N/S/W/O) : ").strip().upper()
+        d = input("direction (N/S/W/E) : ").strip().upper()
 
-        if d not in ("N", "S", "W", "O"):
+        if d not in ("N", "S", "W", "E"):
             print("Direction invalide.")
             continue
 
