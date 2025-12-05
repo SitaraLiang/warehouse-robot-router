@@ -97,7 +97,7 @@ def save_grid_to_file2(filename, grid, start, end):
         f.write("0 0\n")
         f.write("\n")   # fin du bloc
     
-def generer_grilles_test(file_size, file_obs):
+def generer_grilles_test(file_obs):
     obstacles = [10, 20, 30, 40, 50]
     for x in obstacles:
         #for i in range(10):
