@@ -35,14 +35,14 @@ def generate_obstacles(M, N, P):
     
     # Contrainte 2: Chaque ligne de la grille ne peut contenir plus de 2P/M obstacles
     for i in range(M):
-        m.addConstr(quicksum(x[i,j] for j in range(N)) <= 2*P/M)
-        # Contrainte 4: Aucune ligne ne peut contenir la s´equence 101 
+        m.addConstr(quicksum(x[i,j] for j in range(N)) <= 2*P//M)
+        # Contrainte 4: Aucune ligne ne peut contenir la s´equence 101
         for j in range(1, N-1):
             m.addConstr(x[i,j-1] + x[i,j+1] - x[i,j] <= 1)
             
     # Contrainte 3: Chaque colonne de la grille ne peut contenir plus de 2P/N obstacles
     for j in range(N):
-        m.addConstr(quicksum(x[i,j] for i in range(M)) <= 2*P/N)
+        m.addConstr(quicksum(x[i,j] for i in range(M)) <= 2*P//N)
         # Contrainte 5: Aucune colonne ne peut contenir la s´equence 101
         for i in range(1, M-1):
             m.addConstr(x[i-1,j] + x[i+1,j] - x[i,j] <= 1)
