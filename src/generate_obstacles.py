@@ -56,7 +56,7 @@ def generate_obstacles(M, N, P):
     m.optimize()
     
     # .X – primal solution value
-    obstacles = [(i, j) for (i, j), var in x.items() if var.X == 1]
+    obstacles = [(i, j) for (i, j), var in x.items() if var.X > 0.5]
     return obstacles
 
 
